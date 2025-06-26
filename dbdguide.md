@@ -1,5 +1,5 @@
 layout: page
-title: ""
+title: "Welcome to the guide!"
 permalink: /dbdguide
 
 TEST
