@@ -1,7 +1,697 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dead by Daylight Guide</title>
+    <style>
+        :root {
+            --primary: #e31e24;
+            --secondary: #1a1a1a;
+            --accent: #333;
+            --text: #f0f0f0;
+            --highlight: #4a4a4a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.contentstack.io/v3/assets/blt77dc9e8b8a3a0416/blt5c9e0d3f2b8f0b5a/5f4f9a9f6e2a0f0f3f3e3b5e/dead-by-daylight-hero.jpg') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        header h1, header p {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .warning {
+            background-color: #ffcc00;
+            color: #000;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        
+        h2, h3, h4 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        h2 {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        a {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .note {
+            background-color: var(--highlight);
+            padding: 1rem;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .killer-tips {
+            background-color: rgba(227, 30, 36, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .killer-tips h4 {
+            margin-top: 0;
+        }
+        
+        .survivor-list, .killer-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .character-card {
+            background-color: var(--accent);
+            padding: 1rem;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .build-card {
+            background-color: var(--highlight);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .build-card h4 {
+            margin-top: 0;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .video-card {
+            background-color: var(--accent);
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        
+        .video-card h4 {
+            margin-top: 0;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .back-to-top:hover {
+            background-color: #c1161b;
+            text-decoration: none;
+        }
+        
+        footer {
+            background-color: var(--accent);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .survivor-list, .killer-list, .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with [REDACTED] Pages.</p>
+    <header>
+        <h1>Dead by Daylight Guide</h1>
+        <p>Everything you need to know about playing DBD - survivors, killers, builds, strategies and more!</p>
+    </header>
+    
+    <div class="container">
+        <div class="warning">
+            <p>PLEASE NOTE THIS IS A WIP (WORK IN PROGRESS) AND UNTIL A FINAL VERSION IS RELEASED THERE MAY BE BUGS/MISSING INFO</p>
+        </div>
+        
+        <p>Welcome to the DBD guide on how to play including useful tips and tricks about the game, killers, survivors, builds, etc. I hope you enjoy and learn something new. If you find anything useful missing please let me know and i'll be sure to add it in.</p>
+        
+        <p>The main objective it to repair 5 generators and escape by opening the exit door. While doing this you must run away from the killer while your team does generators. They are required to complete skill checks when repairing generators which is a popup on screen and requires you to click within the box otherwise the gen will blow up and lose some progress.</p>
+        
+        <h2>In Depth Info</h2>
+        
+        <h3>Repairing:</h3>
+        <p>To power up the Exit Gates and escape, Survivors must repair 5 of the 7 generators located throughout the map. Skill checks will appear as you work on generators. Fail one and the Killer will be alerted, and your repair progress set back. Multiple Survivors working on the same generator at once will speed up repairs.</p>
+        
+        <h3>Looping the killer:</h3>
+        <p>Most Killers are faster than Survivors. Avoid running in a straight line. Instead, drop pallets in the Killer's path, blind them with a flashlight, or vault through windows to get away. Running will leave scratch marks for them to follow. Walk, crouch, or hide in lockers to avoid detection. The longer the chase, the more time your allies have to focus on generators.</p>
+        
+        <p>If struck twice by the Killer you'll enter the Dying State where you can be picked up and impaled on a sacrificial hook. Attempt to wiggle free while being carried. If hooked, you'll need to rely on your allies to rescue you before the sacrifice is complete. Help each other stay alive, repair generators, and power up the Exit Gates to escape before time runs out.</p>
+        
+        <div class="note">
+            <strong>NOTE:</strong> Throughout this guide i will be referencing to others content, they already have it explained and i think it's a great explanation.
+        </div>
+        
+        <h2>Firstly learning the game, and getting setup correctly.</h2>
+        
+        <h3>DBD Settings:</h3>
+        <p><a href="https://www.youtube.com/watch?v=Bm-5N3eLED8&ab_channel=Hens333" target="_blank">DBD Settings Guide Video</a></p>
+        
+        <h3>Looping guides/mechanics:</h3>
+        <p>General Tips and tricks</p>
+        
+        <div class="video-grid">
+            <div class="video-card">
+                <h4>General Looping Guide</h4>
+                <p><a href="https://www.youtube.com/watch?v=zbX0b8S9njQ&ab_channel=notOtzdarva" target="_blank">notOtzdarva Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Looping Mechanics</h4>
+                <p><a href="https://www.youtube.com/watch?v=Przzvr8K7xM&ab_channel=TheKing" target="_blank">TheKing Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Advanced Looping</h4>
+                <p><a href="https://www.youtube.com/watch?v=jY9Gt5znzPU&ab_channel=TheKing" target="_blank">TheKing Advanced Guide</a></p>
+            </div>
+        </div>
+        
+        <h4>Beginner Looping</h4>
+        <p><a href="https://www.youtube.com/watch?v=IEaIPIPwfMo&ab_channel=OhTofu" target="_blank">OhTofu Beginner Guide</a></p>
+        <ul>
+            <li>What is looping?</li>
+            <li>Pallets vs Windows</li>
+            <li>Vault types</li>
+            <li>Good fast vault practices</li>
+            <li>Bloodlust</li>
+            <li>Entity window blocker</li>
+            <li>Pallet safety (basics)</li>
+            <li>Why loop instead of throw?</li>
+            <li>Good looping practices</li>
+            <li>Finding resources</li>
+            <li>PRACTICE LOOKING BEHIND YOU!!!!!!</li>
+        </ul>
+        
+        <h4>Intermediate Looping</h4>
+        <p><a href="https://www.youtube.com/watch?v=Sy0yIaoKZDY&ab_channel=OhTofu" target="_blank">OhTofu Intermediate Guide</a></p>
+        <ul>
+            <li>Identifying pallet safety</li>
+            <li>Loop length</li>
+            <li>Line of sight</li>
+            <li>Pallets with 1 safe side, 1 unsafe side</li>
+            <li>Vault checkspots</li>
+            <li>Route planning</li>
+            <li>Learn maze tile spawns!</li>
+            <li>Greeding windows</li>
+            <li>Using your distance</li>
+            <li>Fake vaults</li>
+            <li>Fake pallet throws</li>
+            <li>Punishing early swings</li>
+        </ul>
+        
+        <h4>Advanced Looping</h4>
+        <p><a href="https://www.youtube.com/watch?v=WDNZpLw8OFE&ab_channel=OhTofu" target="_blank">OhTofu Advanced Guide</a></p>
+        <ul>
+            <li>Adapt to your killer player</li>
+            <li>Playing unsafe pallets</li>
+            <li>Greeding unsafe pallets</li>
+            <li>Good practice for stuns</li>
+            <li>Pallets with 1 safe side, 1 unsafe side</li>
+            <li>Palletless "time wasters"</li>
+            <li>Vaulting as late as possible</li>
+            <li>Bloodlust management</li>
+            <li>Shift tech</li>
+            <li>Heartbeat reading</li>
+            <li>Camera checkspots</li>
+            <li>Shack checkspot examples</li>
+            <li>Checkspot patience and spacing</li>
+            <li>Putting yourself in the advantageous position</li>
+            <li>Leaving tiles/Using multiple tiles at once</li>
+            <li>LEARN TO HAVE GUARANTEED CHASE VS M1 KILLERS</li>
+        </ul>
+        
+        <p><a href="https://www.youtube.com/watch?v=1OunJkMP5zY&ab_channel=AlbyAround" target="_blank">AlbyAround Looping Guide</a></p>
+        
+        <h3>Hours of videos on how to loop specific maps:</h3>
+        <p><a href="https://www.youtube.com/@Mr_TatorHead" target="_blank">Mr_TatorHead Map Guides</a></p>
+        
+        <h2>BASE GAME survivors and killers:</h2>
+        
+        <h3>Survivors (With perks)</h3>
+        <div class="survivor-list">
+            <div class="character-card">
+                <h4>Dwight</h4>
+                <ul>
+                    <li>Bond</li>
+                    <li>Prove Thyself</li>
+                    <li>Leader</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Meg</h4>
+                <ul>
+                    <li>Adrenaline</li>
+                    <li>Quick and quiet</li>
+                    <li>Sprint burst</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Claudette</h4>
+                <ul>
+                    <li>botany knowledge</li>
+                    <li>self care</li>
+                    <li>empathy</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Jake</h4>
+                <ul>
+                    <li>calm spirit</li>
+                    <li>sabotour</li>
+                    <li>iron will</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>William (Bill)</h4>
+                <ul>
+                    <li>borrowed time</li>
+                    <li>left behind</li>
+                    <li>unbreakable</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Nea</h4>
+                <ul>
+                    <li>streetwise</li>
+                    <li>urban evasion</li>
+                    <li>balanced landing</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>David</h4>
+                <ul>
+                    <li>were gonna live forever (WGLF)</li>
+                    <li>dead hard</li>
+                    <li>no mither</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h3>Killers (With perks)</h3>
+        <div class="killer-list">
+            <div class="character-card">
+                <h4>Trapper</h4>
+                <ul>
+                    <li>Agitation</li>
+                    <li>Brutal Strength</li>
+                    <li>Unerving Presence</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Wraith</h4>
+                <ul>
+                    <li>Bloodhound</li>
+                    <li>Predator</li>
+                    <li>Shadowborn</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Hillbilly</h4>
+                <ul>
+                    <li>tinkerer</li>
+                    <li>enduring</li>
+                    <li>lightborn</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Nurse</h4>
+                <ul>
+                    <li>nurses calling</li>
+                    <li>stridor</li>
+                    <li>Thanatophobia</li>
+                </ul>
+            </div>
+            <div class="character-card">
+                <h4>Huntress</h4>
+                <ul>
+                    <li>Territorial Imperative</li>
+                    <li>Beasts of prey</li>
+                    <li>Huntress lullaby</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2>How perks/items work:</h2>
+        <p>Perks are 3 tiers, for this guide we will assume you have tier 3 to make the most out of the perk. Perks go T1 = Green, T2 = Blue, T3 = Purple. You automatically get the next tier of that characters perks when you prestige (50 levels). Prestige 2 will give you Blue and 3 Purple. Once you hit presitge 1 you can begin unlocking these perks on other characters. In order to get blue and purple you just need to find the perk in the bloodweb 3 times total OR have that perks owner at prestige 3 then you automatically get that characters T3 perks across all your other characters, even new ones you unlock/buy.</p>
+        
+        <p>Full list of perks (I hope) - <a href="https://dennisreep.nl/dbd/perks/survivor/" target="_blank">Survivor Perks List</a></p>
+        
+        <div class="video-grid">
+            <div class="video-card">
+                <h4>Perk Guide</h4>
+                <p><a href="https://www.youtube.com/watch?v=-U39ODxK-KE&ab_channel=ZenBatman" target="_blank">ZenBatman Perk Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Perk Tier List</h4>
+                <p><a href="https://www.youtube.com/watch?v=E75vQdgQMDo&ab_channel=TheTexanShield" target="_blank">TheTexanShield Perk Tier List</a></p>
+            </div>
+        </div>
+        
+        <h2>Checkspots:</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <h4>Checkspot Guide</h4>
+                <p><a href="https://www.youtube.com/watch?v=ffZWmy9Hpms&t=40s&ab_channel=Corcade" target="_blank">Corcade Checkspot Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Advanced Checkspots</h4>
+                <p><a href="https://www.youtube.com/watch?v=ZYXtgAe_EfQ&ab_channel=NoJustice4U" target="_blank">NoJustice4U Checkspot Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Heartbeat Looping</h4>
+                <p><a href="https://www.youtube.com/watch?v=yDR07HgXnn8&t=202s&ab_channel=Fabradbd" target="_blank">Fabradbd Heartbeat Looping</a></p>
+            </div>
+            <div class="video-card">
+                <h4>TL walls</h4>
+                <p><a href="https://www.youtube.com/watch?v=I6iqZLYh-m8&ab_channel=exize" target="_blank">exize TL Walls Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Shack</h4>
+                <p><a href="https://www.youtube.com/watch?v=TWXZLLXQyJs&ab_channel=exize" target="_blank">exize Shack Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Jungle Gym</h4>
+                <p><a href="https://www.youtube.com/watch?v=bqnUTJcNe78&ab_channel=exize" target="_blank">exize Jungle Gym Guide</a></p>
+            </div>
+        </div>
+        
+        <p><a href="https://www.youtube.com/watch?v=qjh2WKRwQ9o&ab_channel=JARPT" target="_blank">Common Spots Guide</a></p>
+        <p><a href="https://www.youtube.com/watch?v=JwEUAMSdIC0&ab_channel=rhyme" target="_blank">Autohaven Guide</a></p>
+        <p><a href="https://www.youtube.com/watch?v=jUf8-JX6R5g&ab_channel=sup" target="_blank">Ormond Guide</a></p>
+        <p><a href="https://www.youtube.com/watch?v=B_RFP4odGr8&ab_channel=exize" target="_blank">Interesting Check Spot Locations</a></p>
+        
+        <h2>Survivor Builds:</h2>
+        <p>Perks are up to you, what i list may not feel good for you. Experiment with what you like, make new builds. I won't list too many examples as it depends what character you pick and how you want to play the game (gens, looping, healing, etc) These builds are base build survivors meaning you do not need to spend real money to unlock them.</p>
+        
+        <p>Only includes base perks:</p>
+        
+        <div class="build-card">
+            <h4>Where are the gens, where's my team?</h4>
+            <ul>
+                <li>Deja vu</li>
+                <li>bond</li>
+                <li>kindred</li>
+                <li>windows/unbreakable</li>
+            </ul>
+            <p>(Bring a toolbox, medkit)</p>
+        </div>
+        
+        <div class="build-card">
+            <h4>Do gens build</h4>
+            <ul>
+                <li>prove thyself</li>
+                <li>deja vu</li>
+                <li>resilience</li>
+                <li>bond</li>
+            </ul>
+            <p>(bring toolkit)</p>
+        </div>
+        
+        <div class="build-card">
+            <h4>Looping build</h4>
+            <ul>
+                <li>Resilience</li>
+                <li>windows</li>
+                <li>balanced landing/dead hard</li>
+                <li>iron will</li>
+            </ul>
+        </div>
+        
+        <div class="build-card">
+            <h4>Healing build</h4>
+            <ul>
+                <li>empathy</li>
+                <li>botany knowledge</li>
+                <li>we'll make it</li>
+                <li>unbreakable</li>
+            </ul>
+            <p>(bring medkit)</p>
+        </div>
+        
+        <p>Please speak to us if you would like more assistance on building a build for your needs. Happy to help. There are 100's of perks available accross surviviors and thousands of combinations so it's not worth me listing more here. Lets chat!</p>
+        
+        <h2>Tunnelling</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <h4>Tunneling Guide</h4>
+                <p><a href="https://www.youtube.com/watch?v=0XxT4OLfeXA&ab_channel=ZenBatman" target="_blank">ZenBatman Tunneling Guide</a></p>
+            </div>
+            <div class="video-card">
+                <h4>Dealing with Tunneling</h4>
+                <p><a href="https://www.youtube.com/watch?v=KNasMWk3AYI&ab_channel=Pally" target="_blank">Pally Tunneling Guide</a></p>
+            </div>
+        </div>
+        
+        <h2>Killer Hints and tips.</h2>
+        
+        <div class="killer-tips">
+            <h4>Trapper</h4>
+            <ul>
+                <li>Keep an eye out on the ground for traps</li>
+                <li>Avoid patches of tall grass.</li>
+                <li>Be careful around obvious vaulting locations like shack window or the windows of various main structures.</li>
+                <li>Disarm traps in his setup area early</li>
+                <li>Get into an early chase with Trapper. (Why? This stops him roaming the map setting up traps. Make sure you're comfortable looping if you do this)</li>
+                <li>Abandon loops if the trapper sets a trap while in chase</li>
+            </ul>
+        </div>
+        
+        <div class="killer-tips">
+            <h4>Wraith</h4>
+            <ul>
+                <li>Can barely be seen while cloaked. Can be heard by beathing noise.</li>
+                <li>Vault into cloaked wraith to waste his time</li>
+                <li>Use audio cues to detect</li>
+                <li>Avoid dropping pallets when he's cloaked</li>
+                <li>Have an escape route planned. Know where the nearest window / pallet is when you work on a generator.</li>
+                <li>Heal up. Wraith thrives on surprise attacks but suffers if he has to chase through two health states.</li>
+                <li>Try to do generators in open areas as a team while keeping safer gens for people who have been hooked before.</li>
+            </ul>
+        </div>
+        
+        <div class="killer-tips">
+            <h4>Hillbilly</h4>
+            <ul>
+                <li>Loop wider when Billy is good at curving</li>
+                <li>Play safe when Billy is in overdrive mode</li>
+                <li>Crouch tech in desperate situations</li>
+                <li>Respect the blue chainsaw, please. He becomes a lot more dangerous when you hear the global chainsaw sound and his chainsaw turns blue.</li>
+                <li>Play around windows.</li>
+                <li>Don't try too hard to hug around props, but it can be great as a final option.</li>
+            </ul>
+        </div>
+        
+        <div class="killer-tips">
+            <h4>Nurse</h4>
+            <ul>
+                <li>Run near the edge of the map</li>
+                <li>Force her to use both blinks</li>
+                <li>Break line of sight and force the Nurse to predict.</li>
+                <li>Just generally be unpredictable with your movement.</li>
+                <li>If she's charging a blink try to run towards her when she blinks. There's a good chance she'll blink past you, and if you're on a two-story building (or above basement) she'll teleport downstairs.</li>
+            </ul>
+        </div>
+        
+        <div class="killer-tips">
+            <h4>Myers</h4>
+            <ul>
+                <li>Avoid feeding myers stalk</li>
+                <li>Pester him if he's stalked you</li>
+                <li>Treat him like a ranged killer</li>
+                <li>Play super safe while looping tier 3</li>
+                <li>When he's in Evil Within 3, don't be afraid to use up pallets. Time he wastes in EW3 is time he won't get to use on other people.</li>
+                <li>If you think you're going to go down anyways try jumping in a locker, as it wastes more of the killer's time grabbing you out.</li>
+            </ul>
+        </div>
+        
+        <div class="killer-tips">
+            <h4>Hag</h4>
+            <ul>
+                <li>Much like Trapper look at the ground.</li>
+                <li>You can crouch walk up to traps to wipe them away.</li>
+                <li>Playing against Hag is similar to playing against Trapper except you want to avoid high-traffic areas of the map.</li>
+                <li>Harass her traps when she's occupied</li>
+                <li>Walk into traps with the camera behind you</li>
+            </ul>
+        </div>
+        
+        <!-- More killer tips would continue here following the same pattern -->
+        
+        <a href="#" class="back-to-top">Back to Top</a>
+    </div>
+    
+    <footer>
+        <p>Dead by Daylight Guide &copy; 2023 | This is an unofficial guide not affiliated with Behaviour Interactive</p>
+    </footer>
+    
+    <button class="dark-mode-toggle" id="darkModeToggle">🌓</button>
+    
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        
+        // Check for saved user preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', '');
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            }
+        });
+        
+        // Smooth scrolling for back to top
+        document.querySelectorAll('a[href="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
